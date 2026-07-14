@@ -1,9 +1,19 @@
 import { Button } from "./components/ui/button";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/react";
 function App() {
   return (
     <>
-      <h1 className="text-5xl ">Hello</h1>
-      <Button variant="outline">This is a Button</Button>
+      <header>
+        <Show when="signed-out">
+          <SignInButton>
+            <Button>Sign In</Button>
+          </SignInButton>
+          <SignUpButton />
+        </Show>
+        <Show when="signed-in">
+          <UserButton />
+        </Show>
+      </header>
     </>
   );
 }

@@ -1,10 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { ClerkProvider } from "@clerk/react";
+import "./index.css";
+import App from "./App.tsx";
 
-createRoot(document.getElementById('root')!).render(
+const PUBLIC_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+
+if (!PUBLIC_KEY) {
+  throw new Error("Missing Publishable Key");
+}
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <ClerkProvider publishableKey={PUBLIC_KEY}>
+      <App />
+    </ClerkProvider>
   </StrictMode>,
-)
+);
